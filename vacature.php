@@ -20,6 +20,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <link rel="stylesheet" href="css/vacature.css">
     <meta charset="UTF-8">
     <title>Vacatures</title>
 </head>

@@ -38,6 +38,7 @@ $result = $conn->query($sql);
 <!DOCTYPE html>
 <html lang="nl">
 <head>
+    <link rel="stylesheet" href="css/vacature.css">
     <meta charset="UTF-8">
     <title>Vacature Details</title>
 </head>
@@ -61,6 +62,17 @@ $result = $conn->query($sql);
     $comment_result = $conn->query($comment_sql);
     ?>
 
+<h3>Plaats een reactie</h3>
+    <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
+        <label for="naam">Naam:</label><br>
+        <input type="text" id="naam" name="naam" required><br><br>
+
+        <label for="reactie">Reactie:</label><br>
+        <textarea id="reactie" name="reactie" rows="4" required></textarea><br><br>
+
+        <input type="submit" name="submit_comment" value="Plaats reactie">
+    </form>
+
     <h2>Reacties</h2>
     <?php
     if ($comment_result->num_rows > 0) {
@@ -76,17 +88,7 @@ $result = $conn->query($sql);
     }
     ?>
 
-    <!-- Reactieformulier -->
-    <h3>Plaats een reactie</h3>
-    <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
-        <label for="naam">Naam:</label><br>
-        <input type="text" id="naam" name="naam" required><br><br>
 
-        <label for="reactie">Reactie:</label><br>
-        <textarea id="reactie" name="reactie" rows="4" required></textarea><br><br>
-
-        <input type="submit" name="submit_comment" value="Plaats reactie">
-    </form>
 </body>
 </html>
 
