@@ -22,7 +22,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
     $insert_comment_sql = "INSERT INTO comments (vacature_id, naam, reactie) VALUES ($vacature_id, '$naam', '$reactie')";
 
     if ($conn->query($insert_comment_sql) === TRUE) {
-        echo "<p>Reactie geplaatst!</p>";
         header("Location: vacature_detail.php?id=" . $vacature_id);
         exit();
     } else {
@@ -43,52 +42,49 @@ $result = $conn->query($sql);
     <title>Vacature Details</title>
 </head>
 <body>
-    <?php
-    if ($result->num_rows > 0) {
-        $row = $result->fetch_assoc();
-        echo "<h1>" . htmlspecialchars($row['titel']) . "</h1>";
-        echo "<p>" . htmlspecialchars($row['beschrijving']) . "</p>";
-        echo "<p><strong>Locatie:</strong> " . htmlspecialchars($row['locatie']) . "</p>";
-        echo "<p><strong>Salaris:</strong> €" . htmlspecialchars($row['salaris']) . "</p>";
-        echo "<p><em>Geplaatst op: " . $row['datum_geplaatst'] . "</em></p>";
-    } else {
-        echo "<p>Vacature niet gevonden.</p>";
-    }
-    ?>
-
-    <!-- Reacties tonen -->
-    <?php
-    $comment_sql = "SELECT * FROM comments WHERE vacature_id = $vacature_id ORDER BY datum_geplaatst DESC";
-    $comment_result = $conn->query($comment_sql);
-    ?>
-
-<h3>Plaats een reactie</h3>
-    <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
-        <label for="naam">Naam:</label><br>
-        <input type="text" id="naam" name="naam" required><br><br>
-
-        <label for="reactie">Reactie:</label><br>
-        <textarea id="reactie" name="reactie" rows="4" required></textarea><br><br>
-
-        <input type="submit" name="submit_comment" value="Plaats reactie">
-    </form>
-
-    <h2>Reacties</h2>
-    <?php
-    if ($comment_result->num_rows > 0) {
-        while ($comment_row = $comment_result->fetch_assoc()) {
-            echo "<div>";
-            echo "<p><strong>" . htmlspecialchars($comment_row['naam']) . "</strong> zei op " . $comment_row['datum_geplaatst'] . ":</p>";
-            echo "<p>" . htmlspecialchars($comment_row['reactie']) . "</p>";
-            echo "<hr>";
-            echo "</div>";
+    <div class="vacature-container">
+        <?php
+        if ($result->num_rows > 0) {
+            $row = $result->fetch_assoc();
+            echo "<div class='vacature'><h1 class='vacature-titel'>" . htmlspecialchars($row['titel']) . "</h1>";
+            echo "<p>" . htmlspecialchars($row['beschrijving']) . "</p>";
+            echo "<p><strong>Locatie:</strong> " . htmlspecialchars($row['locatie']) . "</p>";
+            echo "<p><strong>Salaris:</strong> €" . htmlspecialchars($row['salaris']) . "</p>";
+            echo "<p><em>Geplaatst op: " . $row['datum_geplaatst'] . "</em></p></div>";
+        } else {
+            echo "<p>404 Vacature niet gevonden.</p>";
         }
-    } else {
-        echo "<p>Geen reacties gevonden.</p>";
-    }
-    ?>
+        ?>
 
+        <!-- Reacties tonen -->
+        <h3>Reacties</h3>
+        <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
+            <label for="naam">Naam:</label><br>
+            <input type="text" id="naam" name="naam" required><br>
 
+            <label for="reactie">Reactie:</label><br>
+            <textarea id="reactie" name="reactie" rows="4" class="reactieBalk" required></textarea>
+
+            <input type="submit" name="submit_comment" value="Plaats reactie" class="vacature-button">
+        </form>
+
+        <?php
+        $comment_sql = "SELECT * FROM comments WHERE vacature_id = $vacature_id ORDER BY datum_geplaatst DESC";
+        $comment_result = $conn->query($comment_sql);
+
+        if ($comment_result->num_rows > 0) {
+            while ($comment_row = $comment_result->fetch_assoc()) {
+                echo "<div>";
+                echo "<p><strong>" . htmlspecialchars($comment_row['naam']) . "</strong> zei op " . $comment_row['datum_geplaatst'] . ":</p>";
+                echo "<p>" . htmlspecialchars($comment_row['reactie']) . "</p>";
+                echo "<hr>";
+                echo "</div>";
+            }
+        } else {
+            echo "<p>Geen reacties gevonden.</p>";
+        }
+        ?>
+    </div>
 </body>
 </html>
 

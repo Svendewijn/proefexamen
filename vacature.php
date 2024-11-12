@@ -25,20 +25,22 @@ $result = $conn->query($sql);
     <title>Vacatures</title>
 </head>
 <body>
-    <h1>Vacatures</h1>
+    <div class="marginleft10px">
+        <h1>Vacatures</h1>
+    </div>
 
     <?php
     if ($result->num_rows > 0) {
         // Loop door de vacatures en toon ze
         while ($row = $result->fetch_assoc()) {
-            echo "<div>";
-            echo "<h2><a href='vacature_detail.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['titel']) . "</a></h2>";
+            echo "<div class='vacature'><a href='vacature_detail.php?id=" . $row['id'] . "'>";
+            echo "<h2>" . htmlspecialchars($row['titel']) . "</h2>";
             echo "<p>" . htmlspecialchars($row['beschrijving']) . "</p>";
             echo "<p><strong>Locatie:</strong> " . htmlspecialchars($row['locatie']) . "</p>";
             echo "<p><strong>Salaris:</strong> €" . htmlspecialchars($row['salaris']) . "</p>";
             echo "<p><em>Geplaatst op: " . $row['datum_geplaatst'] . "</em></p>";
-            echo "</div>";
-            echo "<hr>";
+            echo "</a></div>";
+            echo "<br>";
         }
     } else {
         echo "<p>Geen vacatures gevonden.</p>";

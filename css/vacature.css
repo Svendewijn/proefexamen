@@ -10,9 +10,134 @@ body{
     height: 550px;
     background-color: rgb(229, 229, 229);
     border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(219, 219, 219);
+    margin-top: 20px;
 }
 
 .beschrijving{
     width: 400px;
     height: 200px;
+}
+
+.submitVacature{
+    background-color: rgb(0, 211, 0);
+    border-width: 1px;
+    border-radius: 5px;
+    border-style: solid;
+    border-color: green;
+    color: white;
+    font-size: 15px;
+    margin-top: 10px;
+    padding: 5px;
+}
+
+.marginleft10px{
+    margin-left: 20px;
+}
+
+.vacature{
+    width: 500px;
+    height: 50%;
+    background-color: rgb(229, 229, 229);
+    text-decoration: none;
+    border-radius: 10px;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(219, 219, 219);
+    margin-left: 20px;
+    padding: 20px;
+    
+}
+
+a{
+    text-decoration: none;
+}
+
+a:link {
+    color: black;
+  }
+  
+  a:visited {
+    color: black;
+  }
+  
+  a:hover {
+    color: black;
+  }
+  
+  a:active {
+    color: black;
+  }
+
+  .reactieBalk{
+    height: 17px;
+  }
+
+  /* Algemene stijlen */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 20px;
+}
+
+/* Container voor de vacature */
+.vacature-container {
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    margin: 20px auto;
+    max-width: 800px;
+}
+
+/* Titel van de vacature */
+.vacature-titel {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 10px;
+}
+
+/* Secties */
+.vacature-sectie {
+    margin-bottom: 20px;
+}
+
+/* Subtitels */
+.vacature-sectie h2 {
+    font-size: 20px;
+    color: #007BFF;
+    border-bottom: 2px solid #007BFF;
+    padding-bottom: 5px;
+}
+
+/* Lijst met taken en eisen */
+.vacature-lijst {
+    list-style-type: disc;
+    margin-left: 20px;
+}
+
+/* Stijlen voor de knoppen */
+.vacature-button {
+    display: inline-block;
+    background-color: #007BFF;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s;
+}
+
+.vacature-button:hover {
+    background-color: #0056b3;
+}
+
+/* Footer */
+.vacature-footer {
+    font-size: 12px;
+    color: #777;
+    text-align: center;
+    margin-top: 20px;
 }

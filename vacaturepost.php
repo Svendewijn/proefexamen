@@ -19,7 +19,7 @@
                 <br>
                 <label for="beschrijving">Beschrijving:</label>
                 <br>
-                <textarea id="beschrijving" name="beschrijving" class="beschrijving" required></textarea>
+                <textarea id="beschrijving" name="beschrijving" class="beschrijving" placeholder="Iets over uw bedrijf en/of contactgegevens" required></textarea>
                 <br>
                 <label for="locatie">Locatie:</label>
                 <br>
@@ -29,7 +29,7 @@
                 <br>
                 <input type="number" id="salaris" name="salaris" step="0.01">
                 <br>
-                <input type="submit" value="Plaats Vacature">
+                <input type="submit" class="submitVacature" value="Plaats Vacature">
             </form>
         </div>
     </center>
