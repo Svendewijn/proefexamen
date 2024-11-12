@@ -16,10 +16,12 @@ body{
     margin-right: 20%;
     padding: 2%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 13%;
+    margin-top: 8%;
 }
 
 .header{
+    display: flex;
+    justify-content: space-between;
     background-color: #838fb9;
     padding: 20px;
     text-align: center;
@@ -44,5 +46,28 @@ a:link {
     text-align: center;
     height: 5%;
     padding-top: 3%;
-    padding-bottom: 2%;
+    padding-bottom: 5%;
+}
+
+@media only screen and (max-width: 600px) {
+.footer {
+    padding-top: 10%;
+  }
+    
+}
+
+.header-contents{
+    justify-content: space-between;
+    width: 100%;
+    display: flex;
+}
+
+.header-text{
+    margin-top: 10px;
+    display: flex;
+    margin-right: 10px;
+}
+
+.company-links{
+    margin-top: -40px;
 }
