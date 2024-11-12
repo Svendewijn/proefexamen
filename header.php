@@ -14,6 +14,7 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
     <a href="index.php">Help</a> &nbsp;|&nbsp; 
     
     <?php if (isset($_SESSION['user_id'])): // Controleer of de gebruiker is ingelogd ?>
+        <a href="upload.php">Upload</a>
         <a href="logout.php">Uitloggen</a>
     <?php else: ?>
         <a href="inlog.php">Login</a>
