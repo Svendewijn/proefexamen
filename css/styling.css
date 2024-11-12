@@ -27,6 +27,13 @@ body{
 }
 
 a:link {
-    color: black;
+    color: rgb(0, 0, 0);
     text-decoration: none;
+}
+.logo{
+    text-align: left;
+}
+
+.links{
+    
 }
