@@ -1,4 +1,7 @@
 <?php
+// Start de sessie
+session_start();
+
 // Databaseconfiguratie
 $host = 'localhost';
 $db = 'XXL_database';
@@ -19,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = htmlspecialchars(trim($_POST['password']));
 
     // SQL-query om de gebruiker op te halen
-    $sql = "SELECT wachtwoord FROM gebruikers WHERE gebruikersnaam = ?";
+    $sql = "SELECT id, wachtwoord FROM gebruikers WHERE gebruikersnaam = ?";
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -27,13 +30,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Controleer of de gebruiker bestaat
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($hashed_password);
+        $stmt->bind_result($user_id, $hashed_password);
         $stmt->fetch();
 
         // Controleer het wachtwoord
         if (password_verify($password, $hashed_password)) {
-            echo "Inloggen succesvol! Welkom, " . $username . ".";
-            // Hier kun je sessies starten of doorverwijzen naar een andere pagina
+            // Sla de gebruikersinformatie op in de sessie
+            $_SESSION['user_id'] = $user_id; // Sla de gebruikers-ID op in de sessie
+            $_SESSION['username'] = $username; // Sla de gebruikersnaam op in de sessie
+
+            // Redirect naar de oorspronkelijke pagina of naar een standaardpagina
+            $redirect_url = isset($_SESSION['redirect_after_login']) ? $_SESSION['redirect_after_login'] : 'index.php';
+            unset($_SESSION['redirect_after_login']); // Verwijder de redirect sessievariabele
+            header("Location: $redirect_url");
+            exit();
         } else {
             echo "Ongeldige gebruikersnaam of wachtwoord.";
         }
