@@ -9,6 +9,7 @@
 </head>
 
 <body>
+<?php include("header.php");?>
     <center>
         <div class="vacatureForm">
             <form action="vacaturepost.php" method="post">
@@ -33,6 +34,7 @@
             </form>
         </div>
     </center>
+    <?php include("footer.php");?>
 </body>
 
 <?php

@@ -42,6 +42,7 @@ $result = $conn->query($sql);
     <title>Vacature Details</title>
 </head>
 <body>
+    <?php include("header.php");?>
     <div class="vacature-container">
         <?php
         if ($result->num_rows > 0) {
@@ -85,6 +86,7 @@ $result = $conn->query($sql);
         }
         ?>
     </div>
+    <?php include("footer.php");?>
 </body>
 </html>
 

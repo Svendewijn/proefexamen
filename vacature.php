@@ -25,6 +25,7 @@ $result = $conn->query($sql);
     <title>Vacatures</title>
 </head>
 <body>
+<?php include("header.php");?>
     <div class="marginleft10px">
         <h1>Vacatures</h1>
     </div>
@@ -49,6 +50,6 @@ $result = $conn->query($sql);
     $conn->close();
     ?>
 
-    
+<?php include("footer.php");?>
 </body>
 </html>
