@@ -1,13 +1,3 @@
-<?php
-session_start();
-if (!isset($_SESSION['user_id'])) {
-    // Sla de huidige pagina op in de sessie, zodat we de gebruiker kunnen terugsturen na inloggen
-    $_SESSION['redirect_after_login'] = $_SERVER['REQUEST_URI'];
-    header("Location: login.php");
-    exit();
-}
-?>
-
 <!DOCTYPE html>
 <html lang="nl">
 <head>
@@ -17,12 +7,12 @@ if (!isset($_SESSION['user_id'])) {
 </head>
 <body>
     <h2>Uploaden</h2>
-    <form action="upload_process.php" method="post" enctype="multipart/form-data">
+    <form action="uploadprocess.php" method="post" enctype="multipart/form-data">
         <label for="text">Tekst:</label>
         <textarea name="text" id="text"></textarea><br><br>
 
-        <label for="video">Video:</label>
-        <input type="file" name="video" id="video" accept="video/*"><br><br>
+        <label for="video_link">YouTube Link:</label>
+        <input type="url" name="video_link" id="video_link" placeholder="Voer hier de YouTube-link in"><br><br>
 
         <label for="cv">CV:</label>
         <input type="file" name="cv" id="cv" accept=".pdf,.doc,.docx"><br><br>

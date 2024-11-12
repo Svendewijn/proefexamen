@@ -24,42 +24,50 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Verwerk tekst
     $text = $_POST['text'];
 
-    // Verwerk video
-    if (isset($_FILES['video']) && $_FILES['video']['error'] == 0) {
-        $video_path = 'uploads/videos/' . basename($_FILES['video']['name']);
-        move_uploaded_file($_FILES['video']['tmp_name'], $video_path);
-
-        // Sla de video upload in de database op
-        $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_path) VALUES (?, ?, ?)");
-        $file_type = 'video';
-        $stmt->bind_param("iss", $user_id, $file_type, $video_path);
+    // Sla de tekst op in de database
+    if (!empty($text)) {
+        $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_data) VALUES (?, ?, ?)");
+        $file_type = 'text';
+        $stmt->bind_param("iss", $user_id, $file_type, $text);
         $stmt->execute();
         $stmt->close();
+    }
+
+    // Verwerk YouTube-link
+    if (!empty($_POST['video_link'])) {
+        $video_link = $_POST['video_link'];
+
+        // Valideer de YouTube-link
+        if (preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/', $video_link)) {
+            // Sla de YouTube-link op in de database
+            $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_data) VALUES (?, ?, ?)");
+            $file_type = 'video';
+            $stmt->bind_param("iss", $user_id, $file_type, $video_link);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            echo "Ongeldige YouTube-link. Zorg ervoor dat je een correcte link invoert.";
+        }
     }
 
     // Verwerk CV
     if (isset($_FILES['cv']) && $_FILES['cv']['error'] == 0) {
-        $cv_path = 'uploads/cvs/' . basename($_FILES['cv']['name']);
-        move_uploaded_file($_FILES['cv']['tmp_name'], $cv_path);
+        $allowed_types = ['application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document']; // PDF, DOC, DOCX
+        $file_type = $_FILES['cv']['type'];
 
-        // Sla de CV upload in de database op
-        $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_path) VALUES (?, ?, ?)");
-        $file_type = 'cv';
-        $stmt->bind_param("iss", $user_id, $file_type, $cv_path);
-        $stmt->execute();
-        $stmt->close();
-    }
+        // Controleer of het bestandstype geldig is
+        if (in_array($file_type, $allowed_types)) {
+            $cv_data = file_get_contents($_FILES['cv']['tmp_name']); // Lees de inhoud van het bestand
 
-    // Verwerk tekst
-    if (!empty($text)) {
-        // Sla de tekst upload in de database op
-        $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_path) VALUES (?, ?, ?)");
-        $file_type = 'text';
-        $text_path = 'uploads/texts/' . uniqid() . '.txt'; // Unieke naam voor tekstbestand
-        file_put_contents($text_path, $text); // Sla de tekst op in een bestand
-        $stmt->bind_param("iss", $user_id, $file_type, $text_path);
-        $stmt->execute();
-        $stmt->close();
+            // Sla de CV upload in de database op
+            $stmt = $conn->prepare("INSERT INTO uploads (user_id, file_type, file_data) VALUES (?, ?, ?)");
+            $file_type = 'cv';
+            $stmt->bind_param("iss", $user_id, $file_type, $cv_data);
+            $stmt->execute();
+            $stmt->close();
+        } else {
+            echo "Ongeldig bestandstype voor CV. Alleen PDF, DOC en DOCX zijn toegestaan.";
+        }
     }
 
     echo "Bestanden succesvol geüpload!";

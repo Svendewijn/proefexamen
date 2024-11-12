@@ -39,10 +39,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $_SESSION['user_id'] = $user_id; // Sla de gebruikers-ID op in de sessie
             $_SESSION['username'] = $username; // Sla de gebruikersnaam op in de sessie
 
-            // Redirect naar de oorspronkelijke pagina of naar een standaardpagina
-            $redirect_url = isset($_SESSION['redirect_after_login']) ? $_SESSION['redirect_after_login'] : 'index.php';
-            unset($_SESSION['redirect_after_login']); // Verwijder de redirect sessievariabele
-            header("Location: $redirect_url");
+            // Redirect naar een andere pagina (bijvoorbeeld een dashboard)
+            header("Location: index.php");
             exit();
         } else {
             echo "Ongeldige gebruikersnaam of wachtwoord.";
