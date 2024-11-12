@@ -72,3 +72,12 @@ a:link {
 .company-links{
     margin-top: -40px;
 }
+
+/* Verberg de afbeelding standaard */
+#boemImage {
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}

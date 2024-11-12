@@ -1,3 +1,6 @@
+<img id="boemImage" src="images/boem.png" alt="Boem">
+<audio id="boemSound" src="images/boem.mp3"></audio>
+
 <script>
     const boemImage = document.getElementById('boemImage');
     const boemSound = document.getElementById('boemSound');
