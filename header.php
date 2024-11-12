@@ -1,7 +1,7 @@
 <?php
 session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
 ?>
-
+    <link rel="stylesheet" href="css/styling.css">
 <div class="header">
     <div class="header-contents">
     <a href="index.php">
