@@ -16,5 +16,7 @@
 
         <input type="submit" value="Inloggen">
     </form>
+
+    <p>Heb je nog geen account? <a href="registratie.php">Registreer hier</a>.</p>
 </body>
 </html>
