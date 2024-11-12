@@ -1,26 +1,38 @@
 <!DOCTYPE html>
 <html lang="nl">
+
 <head>
+    <link rel="stylesheet" href="css/vacature.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>vacature</title>
 </head>
+
 <body>
-<form action="vacaturepost.php" method="post">
-    <label for="titel">Titel:</label>
-    <input type="text" id="titel" name="titel" required>
-    
-    <label for="beschrijving">Beschrijving:</label>
-    <textarea id="beschrijving" name="beschrijving" required></textarea>
-    
-    <label for="locatie">Locatie:</label>
-    <input type="text" id="locatie" name="locatie" required>
-    
-    <label for="salaris">Salaris:</label>
-    <input type="number" id="salaris" name="salaris" step="0.01">
-    
-    <input type="submit" value="Plaats Vacature">
-</form>
+    <center>
+        <div class="vacatureForm">
+            <form action="vacaturepost.php" method="post">
+                <h2>Vacature aanmaken</h2>
+                <label for="titel">Titel:</label>
+                <br>
+                <input type="text" id="titel" name="titel" required>
+                <br>
+                <label for="beschrijving">Beschrijving:</label>
+                <br>
+                <textarea id="beschrijving" name="beschrijving" class="beschrijving" required></textarea>
+                <br>
+                <label for="locatie">Locatie:</label>
+                <br>
+                <input type="text" id="locatie" name="locatie" required>
+                <br>
+                <label for="salaris">Salaris:</label>
+                <br>
+                <input type="number" id="salaris" name="salaris" step="0.01">
+                <br>
+                <input type="submit" value="Plaats Vacature">
+            </form>
+        </div>
+    </center>
 </body>
 
 <?php
