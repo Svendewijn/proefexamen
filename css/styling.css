@@ -17,6 +17,7 @@ body{
     padding: 2%;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     margin-top: 8%;
+    margin-bottom: 20%;
 }
 
 .header{
@@ -37,7 +38,7 @@ a:link {
 }
 
 .footer{
-    position: fixed;
+    position: static;
     left: 0;
     bottom: 0;
     width: 100%;
