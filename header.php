@@ -11,7 +11,7 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
         
     <a href="voorlichting.php">Voorlichting</a> &nbsp;|&nbsp;
     <a href="vacature.php">Vacatures</a> &nbsp;|&nbsp; 
-    <a href="index.php">Cv's</a> &nbsp;|&nbsp; 
+    <a href="werknemers.php">Cv's</a> &nbsp;|&nbsp; 
     <a href="index.php">Help</a> &nbsp;|&nbsp; 
     <a href="instellingen.php">Instellingen</a> &nbsp;|&nbsp; 
     
