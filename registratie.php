@@ -6,6 +6,7 @@
     <title>Registreren</title>
 </head>
 <body>
+<?php include 'header.php';?>
     <h2>Registreren</h2>
     <form action="registratieprocess.php" method="post">
         <label for="username">Gebruikersnaam:</label>

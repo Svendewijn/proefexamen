@@ -8,7 +8,7 @@
 </head>
 <body>
 <?php include 'header.php';?>
-    <div class="welkom">
+    <div class="block-1">
         <h1>Welkom</h1>
         <p>
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod 

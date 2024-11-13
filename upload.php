@@ -6,6 +6,7 @@
     <title>Bestanden Uploaden</title>
 </head>
 <body>
+<?php include 'header.php';?>
     <h1>Upload Bestanden</h1>
     <form action="uploadprocess.php" method="post" enctype="multipart/form-data">
         <label for="text">Tekstbestand:</label>

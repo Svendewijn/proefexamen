@@ -6,6 +6,7 @@
     <title>Inloggen</title>
 </head>
 <body>
+<?php include 'header.php';?>
     <h2>Inloggen</h2>
     <form action="inlogprocess.php" method="post">
         <label for="username">Gebruikersnaam:</label>
