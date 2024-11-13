@@ -4,8 +4,6 @@ if (!isset($_SESSION['user_id'])) {
     die("Je moet ingelogd zijn om deze pagina te gebruiken.");
 }
 
-echo "Script wordt uitgevoerd"; // Debugging line
-
 $gebruiker_id = $_SESSION['user_id'];
 
 // Databaseconfiguratie
@@ -23,7 +21,7 @@ if ($conn->connect_error) {
 }
 
 // Haal bestanden op voor de ingelogde gebruiker
-$stmt = $conn->prepare("SELECT id, file_name, file_type, video_data FROM uploads WHERE gebruiker_id = ?");
+$stmt = $conn->prepare("SELECT id, file_name, file_type, file_data, video_data FROM uploads WHERE gebruiker_id = ?");
 $stmt->bind_param("i", $gebruiker_id);
 $stmt->execute();
 $result = $stmt->get_result();
@@ -32,19 +30,21 @@ $result = $stmt->get_result();
 if ($result->num_rows > 0) {
     echo "<h1>Beschikbare Bestanden</h1>";
     while ($row = $result->fetch_assoc()) {
-        echo "<h2>" . htmlspecialchars($row['file_name']) . "</h2>";
-        echo "<p>Bestandstype: " . htmlspecialchars($row['file_type']) . "</p>"; // Debugging line
-
-        // Check if the file type is a video
+        // Controleer of het bestandstype een video is
         if (in_array($row['file_type'], ['video/mp4', 'video/quicktime'])) {
-            // Embed the video directly
+            // Embed de video direct
+            echo "<h2>" . htmlspecialchars($row['file_name']) . "</h2>";
             echo "<video width='640' height='480' controls>
                     <source src='data:" . htmlspecialchars($row['file_type']) . ";base64," . base64_encode($row['video_data']) . "' type='" . htmlspecialchars($row['file_type']) . "'>
                     Your browser does not support the video tag.
                   </video>";
+        } elseif ($row['file_type'] == 'text') {
+            // Voor tekst, toon de inhoud
+            echo "<h2>" . htmlspecialchars($row['file_name']) . "</h2>";
+            echo "<p>" . nl2br(htmlspecialchars($row['file_data'])) . "</p>"; // Gebruik nl2br om nieuwe regels te behouden
         } else {
-            // Voeg een downloadlink toe voor andere bestandstypen
-            echo "<a href='download.php?id=" . $row['id'] . "'>Download " . htmlspecialchars($row['file_name']) . "</a>";
+            // Voor andere bestandstypen, toon de bestandsnaam als een downloadlink
+            echo "<h2><a href='download.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['file_name']) . "</a></h2>";
         }
     }
 } else {

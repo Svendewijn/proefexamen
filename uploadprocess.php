@@ -27,8 +27,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // Sla de tekst op in de database
     if (!empty($text)) {
         $stmt = $conn->prepare("INSERT INTO uploads (gebruiker_id, file_type, file_data, file_name) VALUES (?, ?, ?, ?)");
-        $file_type = 'text';
-        $file_name = 'tekstbestand.txt'; // Geef hier een naam voor het tekstbestand
+        $file_type = 'text'; // Aanduiding dat dit tekst is
+        $file_name = 'tekstbestand'; // Geen extensie, gewoon een naam
         $stmt->bind_param("isss", $gebruiker_id, $file_type, $text, $file_name);
         $stmt->execute();
         $stmt->close();

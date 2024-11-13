@@ -40,7 +40,7 @@ if ($file_id) {
         header('Content-Disposition: attachment; filename="' . basename($file_name) . '"');
         header('Expires: 0');
         header('Cache-Control: must-revalidate');
-        header(' Pragma: public');
+        header('Pragma: public');
         header('Content-Length: ' . strlen($file_data));
         header('Connection: close');
 
