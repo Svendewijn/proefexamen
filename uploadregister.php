@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <link rel="stylesheet" href="css/styling.css">
     <script>
         window.onload = function() {
             const videos = document.querySelectorAll('video');
@@ -207,5 +208,6 @@
     <video controls loop>
         <source src="images/Shart.mp4" type="video/mp4">
     </video>
+    <?php include("footer.php");?>
 </body>
 </html>
