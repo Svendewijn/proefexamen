@@ -34,6 +34,9 @@ if ($conn->connect_error) {
     die("Verbinding mislukt: " . $conn->connect_error);
 }
 
+// Haal de rol van de ingelogde gebruiker op
+$rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : ''; 
+
 // Haal gebruikers op die een CV hebben geüpload
 $sql = "SELECT g.id, g.gebruikersnaam, g.email 
         FROM gebruikers g 
@@ -51,7 +54,14 @@ if ($result->num_rows > 0) {
         echo "<tr>";
         echo "<td>" . htmlspecialchars($row['gebruikersnaam']) . "</td>";
         echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-        echo "<td><a href='profiel.php?id=" . $row['id'] . "' class='btn'>Bekijk Profiel</a></td>";
+        echo "<td><a href='profiel.php?id=" . $row['id'] . "' class='btn'>Bekijk Profiel</a>";
+
+        // Voeg eventueel extra acties toe voor admins
+        if ($rol === 'admin') {
+            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder</a>"; // Voorbeeld van een delete knop
+        }
+        
+        echo "</td>";
         echo "</tr>";
     }
     
