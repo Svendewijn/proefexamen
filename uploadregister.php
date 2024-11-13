@@ -7,9 +7,12 @@
     <script>
         window.onload = function() {
             const videos = document.querySelectorAll('video');
+            const speeds = [0.5, 1, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75, 0.5, 1.5, 2, 0.75, 1.25, 1.75];
+
             videos.forEach((video, index) => {
                 // Stel de vertraging in op basis van de index (in milliseconden)
-                const delay = index * 100; // 1000 ms = 1 seconde
+                const delay = index * 100; // 100 ms = 0.1 seconde
+                video.playbackRate = speeds[index % speeds.length]; // Gebruik een snelheid uit de array
                 setTimeout(() => {
                     video.play();
                 }, delay);
