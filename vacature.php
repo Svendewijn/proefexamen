@@ -12,8 +12,11 @@ if ($conn->connect_error) {
     die("Verbinding mislukt: " . $conn->connect_error);
 }
 
-// Haal vacatures op
-$sql = "SELECT * FROM vacatureposts ORDER BY datum_geplaatst DESC";
+// Haal vacatures op met gebruikersinformatie
+$sql = "SELECT vp.*, g.gebruikersnaam 
+        FROM vacatureposts vp 
+        JOIN gebruikers g ON vp.gebruiker_id = g.id 
+        ORDER BY vp.datum_geplaatst DESC";
 $result = $conn->query($sql);
 ?>
 
@@ -26,9 +29,10 @@ $result = $conn->query($sql);
 </head>
 <body>
 <?php include("header.php");?>
-    <div class="marginleft10px">
-        <h1>Vacatures</h1>
-    </div>
+<div class="marginleft10px">
+    <h1>Vacatures</h1>
+    <a href="vacaturepost.php" class="vacature-button">Plaats Vacature</a>
+</div>
 
     <?php
     if ($result->num_rows > 0) {
@@ -39,6 +43,7 @@ $result = $conn->query($sql);
             echo "<p>" . htmlspecialchars($row['beschrijving']) . "</p>";
             echo "<p><strong>Locatie:</strong> " . htmlspecialchars($row['locatie']) . "</p>";
             echo "<p><strong>Salaris:</strong> €" . htmlspecialchars($row['salaris']) . "</p>";
+            echo "<p><strong>Geplaatst door:</strong> " . htmlspecialchars($row['gebruikersnaam']) . "</p>"; // Gebruikersnaam tonen
             echo "<p><em>Geplaatst op: " . $row['datum_geplaatst'] . "</em></p>";
             echo "</a></div>";
             echo "<br>";

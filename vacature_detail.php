@@ -1,4 +1,8 @@
 <?php
+session_start(); // Zorg ervoor dat de sessie is gestart
+
+error_reporting(E_ALL ^ E_NOTICE); 
+
 // Databaseverbinding
 $servername = "localhost";
 $username = "root";
@@ -16,16 +20,22 @@ $vacature_id = isset($_GET['id']) ? (int)$_GET['id'] : 0;
 
 // Opslaan van een nieuwe reactie
 if ($_SERVER["REQUEST_METHOD"] == "POST" && isset($_POST['submit_comment'])) {
-    $naam = $conn->real_escape_string($_POST['naam']);
-    $reactie = $conn->real_escape_string($_POST['reactie']);
-
-    $insert_comment_sql = "INSERT INTO comments (vacature_id, naam, reactie) VALUES ($vacature_id, '$naam', '$reactie')";
-
-    if ($conn->query($insert_comment_sql) === TRUE) {
-        header("Location: vacature_detail.php?id=" . $vacature_id);
-        exit();
+    // Controleer of de gebruiker is ingelogd
+    if (!isset($_SESSION['user_id'])) {
+        echo "<p>Je moet ingelogd zijn om een reactie achter te laten.</p>";
     } else {
-        echo "<p>Fout bij het plaatsen van de reactie: " . $conn->error . "</p>";
+        // Gebruik de gebruikersnaam uit de sessie
+        $naam = $_SESSION['username']; // Haal de gebruikersnaam uit de sessie
+        $reactie = $conn->real_escape_string($_POST['reactie']);
+
+        $insert_comment_sql = "INSERT INTO comments (vacature_id, naam, reactie) VALUES ($vacature_id, '$naam', '$reactie')";
+
+        if ($conn->query($insert_comment_sql) === TRUE) {
+            header("Location: vacature_detail.php?id=" . $vacature_id);
+            exit();
+        } else {
+            echo "<p>Fout bij het plaatsen van de reactie: " . $conn->error . "</p>";
+        }
     }
 }
 
@@ -44,6 +54,7 @@ $result = $conn->query($sql);
 <body>
     <?php include("header.php");?>
     <div class="vacature-container">
+    <a href="vacature.php" class="vacature-button">Terug naar Vacatures</a>
         <?php
         if ($result->num_rows > 0) {
             $row = $result->fetch_assoc();
@@ -59,16 +70,6 @@ $result = $conn->query($sql);
 
         <!-- Reacties tonen -->
         <h3>Reacties</h3>
-        <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
-            <label for="naam">Naam:</label><br>
-            <input type="text" id="naam" name="naam" required><br>
-
-            <label for="reactie">Reactie:</label><br>
-            <textarea id="reactie" name="reactie" rows="4" class="reactieBalk" required></textarea>
-
-            <input type="submit" name="submit_comment" value="Plaats reactie" class="vacature-button">
-        </form>
-
         <?php
         $comment_sql = "SELECT * FROM comments WHERE vacature_id = $vacature_id ORDER BY datum_geplaatst DESC";
         $comment_result = $conn->query($comment_sql);
@@ -85,8 +86,23 @@ $result = $conn->query($sql);
             echo "<p>Geen reacties gevonden.</p>";
         }
         ?>
+
+        <?php
+        // Controleer of de gebruiker is ingelogd voordat het reactieformulier wordt weergegeven
+        if (isset($_SESSION['user_id'])) {
+        ?>
+            <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
+                <p><strong> Reactie achterlaten als <?php echo htmlspecialchars($_SESSION['username']); ?>:</strong></p>
+                <textarea name="reactie" required></textarea>
+                <br>
+                <input type="submit" name="submit_comment" value="Plaats reactie">
+            </form>
+        <?php
+        } else {
+            echo "<p>Log in om een reactie achter te laten.</p>";
+        }
+        ?>
     </div>
-    <?php include("footer.php");?>
 </body>
 </html>
 
