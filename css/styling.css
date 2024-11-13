@@ -135,15 +135,57 @@ a:link {
     transform: translate(-50%, -50%);
 }
 
-/* styling voor de instellingen pagina */
-.instellingen {
-    color: black;
-    background-color: rgb(240, 240, 240);
-    font-size: medium;
-    border: 1px solid #ccc;
-    width: 80%;
-    margin: 0 auto;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    margin-top: 20px;
+
+.block-settings {
+    max-width: 600px; 
+    margin: 20px auto; 
+    padding: 20px; 
+    border: 1px solid #ccc; 
+    border-radius: 8px; 
+    background-color: #f9f9f9; 
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); 
+}
+
+.block-settings h1 {
+    text-align: center; 
+    color: #333; 
+}
+
+.block-settings label {
+    display: block; 
+    margin: 10px 0 5px; 
+    font-weight: bold; 
+}
+
+.block-settings input[type="text"],
+.block-settings input[type="email"],
+.block-settings input[type="password"],
+.block-settings select {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.block-settings input[type="submit"] {
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 4px; 
+    cursor: not-allowed; 
+    font-size: 16px; 
+    transition: background-color 0.3s; 
+}
+
+.block-settings input[type="submit"]:hover {
+    background-color: #45a049; 
+    cursor: pointer; 
+}
+
+.block-settings input[type="submit"]:disabled {
+    background-color: #ccc; 
+    cursor: not-allowed; 
 }
