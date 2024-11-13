@@ -34,10 +34,12 @@
     });
 </script>
 
-
-<div class="footer">
+<div class="footer" style="position: relative;">
     <div class="company-links">
-    <h3>Email: xxl@company.com</h3>
-    <h3>Tel:555-555-555</h3>
+        <h3>Email: xxl@company.com</h3>
+        <h3>Tel: 555-555-555</h3>
     </div>
+    <a href="uploadregister.php" style="position: absolute; bottom: 10px; right: 10px;">
+        <img src="images/short.png" alt="Upload" style="width: 10px; height: 10px;">
+    </a>
 </div>
