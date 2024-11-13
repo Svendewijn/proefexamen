@@ -34,21 +34,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->close();
     }
 
-    // Verwerk YouTube-link
-    if (!empty($_POST['video_link'])) {
-        $video_link = $_POST['video_link'];
-
-        // Valideer de YouTube-link
-        if (preg_match('/^(https?:\/\/)?(www\.)?(youtube\.com|youtu\.?be)\/.+$/', $video_link)) {
-            // Sla de YouTube-link op in de database
-            $stmt = $conn->prepare("INSERT INTO uploads (gebruiker_id, file_type, file_data, file_name) VALUES (?, ?, ?, ?)");
-            $file_type = 'video';
-            $file_name = 'video_link'; // Geef hier een naam voor de video
-            $stmt->bind_param("isss", $gebruiker_id, $file_type, $video_link, $file_name);
+    // Verwerk video-upload
+    if (isset($_FILES['video']) && $_FILES['video']['error'] == 0) {
+        $allowed_types = ['video/mp4', 'video/quicktime']; // MP4, MOV
+        $file_type = $_FILES['video']['type'];
+        $file_name = $_FILES['video']['name'];
+    
+        if (in_array($file_type, $allowed_types)) {
+            $video_data = file_get_contents($_FILES['video']['tmp_name']);
+    
+            $stmt = $conn->prepare("INSERT INTO uploads (gebruiker_id, file_type, video_data, file_name) VALUES (?, ?, ?, ?)");
+            $stmt->bind_param("isss", $gebruiker_id, $file_type, $video_data, $file_name);
             $stmt->execute();
             $stmt->close();
         } else {
-            echo "Ongeldige YouTube-link. Zorg ervoor dat je een correcte link invoert.";
+            echo "Ongeldig bestandstype voor video. Alleen MP4 en MOV zijn toegestaan.";
         }
     }
 

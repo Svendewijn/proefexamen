@@ -12,8 +12,8 @@
         <label for="text">Tekstbestand:</label>
         <textarea name="text" id="text" rows="4" cols="50"></textarea><br>
 
-        <label for="video_link">YouTube Link:</label>
-        <input type="text" name="video_link" id="video_link"><br>
+        <label for="video">Upload Video (MP4, MOV):</label>
+        <input type="file" name="video" id="video" accept=".mp4,.mov"><br>
 
         <label for="cv">Upload CV (PDF, DOC, DOCX):</label>
         <input type="file" name="cv" id="cv"><br>
