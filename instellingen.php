@@ -11,25 +11,74 @@
 
 <div class="block-settings">
     <h1>Instellingen</h1>
-    <form action="#" method="post">
-        <label for="username">Gebruikersnaam:</label>
-        <input type="text" id="username" name="username" value="Huidige gebruikersnaam" disabled>
-        
+    <button id="invertButton">Dark mode? soort van</button>
+    
+    <form action="instellingen.php" method="post">
         <label for="email">E-mail:</label>
-        <input type="email" id="email" name="email" value="huidige.email@example.com" disabled>
+        <input type="email" id="email" name="email" required>
         
-        <label for="password">Wachtwoord:</label>
-        <input type="password" id="password" name="password" placeholder="Nieuw wachtwoord">
+        <label for="password">Nieuw Wachtwoord:</label>
+        <input type="password" id="password" name="password" placeholder="Nieuw wachtwoord (laat leeg om niet te wijzigen)">
         
-        <label for="rol">Rol:</label>
-        <select id="rol" name="rol">
-            <option value="werkgever">Werkgever</option>
-            <option value="werknemer">Werknemer</option>
-        </select>
-        
-        <input type="submit" value="Opslaan" disabled>
+        <input type="submit" value="Opslaan">
     </form>
 </div>
+
+<?php
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
+
+if (!isset($_SESSION['user_id'])) {
+    die("Je moet ingelogd zijn om deze pagina te gebruiken.");
+}
+
+// Databaseconfiguratie
+$host = 'localhost';
+$db = 'XXL_database';
+$user = 'root'; // of jouw gebruikersnaam
+$pass = ''; // of jouw wachtwoord
+
+// Maak verbinding met de database
+$conn = new mysqli($host, $user, $pass, $db);
+
+// Controleer de verbinding
+if ($conn->connect_error) {
+    die("Verbinding mislukt: " . $conn->connect_error);
+}
+
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    $userId = $_SESSION['user_id'];
+    $email = htmlspecialchars(trim($_POST['email']));
+    $password = htmlspecialchars(trim($_POST['password']));
+
+    // Update de e-mail
+    $stmt = $conn->prepare("UPDATE gebruikers SET email = ? WHERE id = ?");
+    $stmt->bind_param("si", $email, $userId);
+    $stmt->execute();
+
+    // Update het wachtwoord als het is ingevuld
+    if (!empty($password)) {
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        $stmt = $conn->prepare("UPDATE gebruikers SET wachtwoord = ? WHERE id = ?");
+        $stmt->bind_param("si", $hashed_password, $userId);
+        $stmt->execute();
+    }
+
+    echo "Instellingen succesvol bijgewerkt!";
+}
+
+$conn->close();
+?>
+
+<script>
+    const invertButton = document.getElementById('invertButton');
+    
+    invertButton.addEventListener('click', function() {
+        document.body.classList.toggle('inverted');
+    });
+</script>
+
 <?php include 'footer.php'; ?>
 </body>
 </html>
