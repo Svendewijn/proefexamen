@@ -13,6 +13,7 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
     <a href="vacature.php">Vacatures</a> &nbsp;|&nbsp; 
     <a href="index.php">Cv's</a> &nbsp;|&nbsp; 
     <a href="index.php">Help</a> &nbsp;|&nbsp; 
+    <a href="instellingen.php">Instellingen</a> &nbsp;|&nbsp; 
     
     <?php if (isset($_SESSION['user_id'])): // Controleer of de gebruiker is ingelogd ?>
         <a href="upload.php">Upload</a> &nbsp;|&nbsp;
