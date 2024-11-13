@@ -22,7 +22,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $password = htmlspecialchars(trim($_POST['password']));
 
     // SQL-query om de gebruiker op te halen
-    $sql = "SELECT id, wachtwoord FROM gebruikers WHERE gebruikersnaam = ?";
+    $sql = "SELECT id, wachtwoord, rol FROM gebruikers WHERE gebruikersnaam = ?"; // Rol toevoegen aan de query
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -30,7 +30,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Controleer of de gebruiker bestaat
     if ($stmt->num_rows > 0) {
-        $stmt->bind_result($user_id, $hashed_password);
+        $stmt->bind_result($user_id, $hashed_password, $rol); // Rol toevoegen aan de bind_result
         $stmt->fetch();
 
         // Controleer het wachtwoord
@@ -38,6 +38,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             // Sla de gebruikersinformatie op in de sessie
             $_SESSION['user_id'] = $user_id; // Sla de gebruikers-ID op in de sessie
             $_SESSION['username'] = $username; // Sla de gebruikersnaam op in de sessie
+            $_SESSION['rol'] = $rol; // Sla de rol op in de sessie
 
             // Redirect naar een andere pagina (bijvoorbeeld een dashboard)
             header("Location: index.php");
