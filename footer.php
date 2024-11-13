@@ -32,12 +32,29 @@
             typedSequence = '';
         }
     });
+
+    // Button click counter
+    let buttonPressCount = 0;
+
+    function handleButtonClick() {
+        buttonPressCount++;
+        
+        // No color change needed after 5 presses
+        if (buttonPressCount === 5) {
+            // Change the background image of the body
+            document.body.style.backgroundImage = "url('images/blackerhacker.jpg')";
+            document.body.style.backgroundSize = "cover"; // Optional: Cover the entire background
+        }
+    }
 </script>
 
 <div class="footer" style="position: relative;">
     <div class="company-links">
         <h3>Email: xxl@company.com</h3>
-        <h3>Tel: 555-555-555</h3>
+        <button id="telButton" onclick="handleButtonClick()" style="background: none; border: none; color: inherit; font-size: 1.17em; font-weight: bold;">
+            Tel: 555-555-555
+        </button>
+        <!-- Removed the counter text -->
     </div>
     <a href="uploadregister.php" style="position: absolute; bottom: 10px; right: 10px;">
         <img src="images/short.png" alt="Upload" style="width: 10px; height: 10px;">
