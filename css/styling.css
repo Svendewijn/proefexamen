@@ -134,3 +134,16 @@ a:link {
     left: 50%;
     transform: translate(-50%, -50%);
 }
+
+/* styling voor de instellingen pagina */
+.instellingen {
+    color: black;
+    background-color: rgb(240, 240, 240);
+    font-size: medium;
+    border: 1px solid #ccc;
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-top: 20px;
+}
