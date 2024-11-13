@@ -22,6 +22,7 @@
     </script>
 </head>
 <body>
+    <marquee scrollamount="60" direction="down">
     <video controls loop>
         <source src="images/Shart.mp4" type="video/mp4">
     </video>
@@ -208,6 +209,7 @@
     <video controls loop>
         <source src="images/Shart.mp4" type="video/mp4">
     </video>
+    </marquee>
     <?php include("footer.php");?>
 </body>
 </html>
