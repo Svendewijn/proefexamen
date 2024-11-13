@@ -37,13 +37,13 @@ if (isset($_GET['id'])) {
     $userId = intval($_GET['id']); // Zorg ervoor dat de ID een integer is
 
     // Haal gebruikersgegevens op
-    $stmtUser    = $conn->prepare("SELECT gebruikersnaam, email FROM gebruikers WHERE id = ?");
-    $stmtUser   ->bind_param("i", $userId);
-    $stmtUser   ->execute();
-    $resultUser    = $stmtUser   ->get_result();
+    $stmtUser  = $conn->prepare("SELECT gebruikersnaam, email FROM gebruikers WHERE id = ?");
+    $stmtUser ->bind_param("i", $userId);
+    $stmtUser ->execute();
+    $resultUser  = $stmtUser ->get_result();
 
-    if ($resultUser   ->num_rows > 0) {
-        $user = $resultUser   ->fetch_assoc();
+    if ($resultUser ->num_rows > 0) {
+        $user = $resultUser ->fetch_assoc();
         echo "<h2>" . htmlspecialchars($user['gebruikersnaam']) . "'s Profiel</h2>";
         echo "<p>Email: " . htmlspecialchars($user['email']) . "</p>";
     } else {
@@ -59,19 +59,19 @@ if (isset($_GET['id'])) {
     // Controleer of er bestanden zijn
     if ($resultFiles->num_rows > 0) {
         while ($row = $resultFiles->fetch_assoc()) {
+            // Debug: Print de gegevens van het bestand
+            // var_dump($row); // Uncomment deze regel voor debugging
+
             // Controleer of het bestandstype een video is
             if (in_array($row['file_type'], ['video/mp4', 'video/quicktime'])) {
                 // Embed de video direct
                 echo "<video width='640' height='480' controls>
                         <source src='data:" . htmlspecialchars($row['file_type']) . ";base64," . base64_encode($row['video_data']) . "' type='" . htmlspecialchars($row['file_type']) . "'>
                         Your browser does not support the video tag.
-                      </video>";
+                    </video>";
             } elseif ($row['file_type'] == 'text') {
                 // Voor tekst, toon alleen de inhoud zonder bestandsnaam
                 echo "<p>" . nl2br(htmlspecialchars($row['file_data'])) . "</p>"; // Gebruik nl2br om nieuwe regels te behouden
-            } elseif ($row['file_type'] == 'cv') {
-                // Voor CV's, toon de bestandsnaam als een downloadlink
-                echo "<h2><a href='download.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['file_name']) . "</a></h2>";
             } else {
                 // Voor andere bestandstypen, toon de bestandsnaam als een downloadlink
                 echo "<h2><a href='download.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['file_name']) . "</a></h2>";
@@ -81,7 +81,7 @@ if (isset($_GET['id'])) {
         echo "Geen bestanden beschikbaar voor deze gebruiker.";
     }
 
-    $stmtUser   ->close();
+    $stmtUser ->close();
     $stmtFiles->close();
 } else {
     echo "Geen gebruiker ID opgegeven.";
