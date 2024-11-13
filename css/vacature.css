@@ -125,15 +125,15 @@ body {
 /* Voeg deze stijl toe aan css/vacature.css */
 .vacature-button {
     display: inline-block;
-    background-color: #8a898e; /* Blauwe achtergrond */
-    color: white!important; /* Witte tekst */
-    padding: 10px 15px; /* Opvulling */
-    border-radius: 5px; /* Hoekafgeronde knoppen */
-    text-decoration: none; /* Geen onderstreping */
-    margin: 5px; /* Ruimte tussen knoppen */
-    transition: background-color 0.3s; /* Effect bij hover */
+    background-color: #8a898e;
+    color: white!important;
+    padding: 10px 15px; 
+    border-radius: 5px; 
+    text-decoration: none; 
+    margin: 5px;
+    transition: background-color 0.3s; 
 }
 
 .vacature-button:hover {
-    background-color: #838fb9; /* Donkerder blauw bij hover */
+    background-color: #838fb9;
 }
