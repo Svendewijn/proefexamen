@@ -297,3 +297,49 @@ tr:hover {
         height: auto; /* Laat de hoogte automatisch aanpassen */
     }
 }
+
+/* Responsive stijlen voor mobiele apparaten */
+@media only screen and (max-width: 600px) {
+    table {
+        width: 100%; /* Maak de tabel breedte responsief */
+        display: block; /* Maak de tabel blokken voor mobiel */
+    }
+
+    thead {
+        display: none; /* Verberg de header op mobiele apparaten */
+    }
+
+    tr {
+        margin-bottom: 15px; /* Ruimte tussen de rijen */
+        display: block; /* Maak elke rij een blok */
+        border: 1px solid #ddd; /* Voeg een rand toe aan de rijen */
+    }
+
+    td {
+        text-align: right; /* Rechts uitlijnen */
+        padding-left: 50%; /* Ruimte voor labels */
+        position: relative; /* Positioneer relatief */
+    }
+
+    td:before {
+        content: attr(data-label); /* Label voor de cellen */
+        position: absolute; /* Absoluut positioneren */
+        left: 10px; /* Ruimte aan de linkerkant */
+        width: 45%; /* Breedte van de label */
+        padding-right: 10px; /* Ruimte aan de rechterkant */
+        white-space: nowrap; /* Voorkom dat de tekst omloopt */
+        font-weight: bold; /* Maak de labels vetgedrukt */
+    }
+
+    .block-2 {
+        width: 90%; /* Maak de blokken breedte responsief */
+        margin: 10px auto; /* Centraal uitlijnen */
+        padding: 15px; /* Voeg wat padding toe */
+    }
+
+    .btn {
+        width: 100%; /* Maak knoppen breedte responsief */
+        padding: 10px; /* Zorg voor een consistente padding */
+        font-size: 14px; /* Pas de lettergrootte aan */
+    }
+}

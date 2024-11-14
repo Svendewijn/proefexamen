@@ -2,7 +2,7 @@
 <html lang="nl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Voeg deze regel toe -->
     <title>Werknemers</title>
     <link rel="stylesheet" href="css/styling.css"> <!-- Voeg hier je CSS-bestand toe -->
 </head>
@@ -52,27 +52,19 @@ if ($result->num_rows > 0) {
     
     while ($row = $result->fetch_assoc()) {
         echo "<tr>";
-        echo "<td>" . htmlspecialchars($row['gebruikersnaam']) . "</td>";
-        echo "<td>" . htmlspecialchars($row['email']) . "</td>";
-        echo "<td><a href='profiel.php?id=" . $row['id'] . "' class='btn'>Bekijk Profiel</a>";
-
-        // Voeg eventueel extra acties toe voor admins
-        if ($rol === 'admin' && $row['id'] != $_SESSION['user_id']) {
-            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder</a>"; // Voorbeeld van een delete knop voor admins
+        echo "<td data-label='Gebruikersnaam'>" . htmlspecialchars($row['gebruikersnaam']) . "</td>"; // Correcte aanroep van $row
+        echo "<td data-label='Email'>" . htmlspecialchars($row['email']) . "</td>";
+        echo "<td data-label='Acties'>";
+        echo "<a href='view_cv.php?id=" . $row['id'] . "' class='btn'>Bekijk CV</a>";
+        if ($rol === 'admin') {
+            echo "<a href='delete_user.php?id=" . $row['id'] . "' class='btn' onclick='return confirm(\"Weet je zeker dat je deze gebruiker wilt verwijderen?\");'>Verwijder</a>";
         }
-
-        // Voeg een delete-knop toe voor de ingelogde gebruiker
-        if ($row['id'] == $_SESSION['user_id']) {
-            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder Mijn Uploads</a>";
-        }
-        
         echo "</td>";
         echo "</tr>";
     }
-    
     echo "</table>";
 } else {
-    echo "Geen werknemers met CV's gevonden.";
+    echo "<p>Geen werknemers gevonden.</p>";
 }
 
 $conn->close();
