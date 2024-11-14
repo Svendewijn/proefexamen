@@ -31,22 +31,22 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
         }
     });
 
-    // Update de tekst bij het laden van de pagina
-    window.onload = function() {
-        // Geen tekst meer tonen
-    };
-
     const potgoudImageSrc = 'images/potgoud.jpg';
     const potgoudImageWidth = '200px';
     const potgoudImageHeight = '200px';
-    let typedSequence = '';
-    const targetSequence = 'grotepotgoud';
+    let typedSequenceGrotepotgoud = '';
+    const targetSequenceGrotepotgoud = 'grotepotgoud';
+    let mouseX, mouseY;
+
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
 
     document.addEventListener('keydown', function(event) {
-        typedSequence += event.key;
+        typedSequenceGrotepotgoud += event.key;
 
-        // Controleer of de sequence overeenkomt met de doelsequence
-        if (typedSequence === targetSequence) {
+        if (typedSequenceGrotepotgoud === targetSequenceGrotepotgoud) {
             const clonePotgoud = setInterval(() => {
                 const potgoudImage = document.createElement('img');
                 potgoudImage.src = potgoudImageSrc;
@@ -58,22 +58,15 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
                 document.body.appendChild(potgoudImage);
             }, 25);
 
-
             window.cloneIntervalId = clonePotgoud;
+            typedSequenceGrotepotgoud = ''; // Reset de sequence
         }
 
-        if (!targetSequence.startsWith(typedSequence)) {
-            typedSequence = '';
+        if (!targetSequenceGrotepotgoud.startsWith(typedSequenceGrotepotgoud)) {
+            typedSequenceGrotepotgoud = '';
         }
-    });
-
-    let mouseX, mouseY;
-    document.addEventListener('mousemove', (event) => {
-        mouseX = event.clientX;
-        mouseY = event.clientY;
     });
 </script>
-
 
 <div class="header">
     <div class="header-contents">
