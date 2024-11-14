@@ -93,7 +93,7 @@ a:link {
 }
 /* footer styling */
 .footer{
-    position: static;
+    position: fixed;
     left: 0;
     bottom: 0;
     width: 100%;
@@ -103,13 +103,15 @@ a:link {
     height: 5%;
     padding-top: 3%;
     padding-bottom: 5%;
-    margin-top: 5%;
+    margin-top: 10%;
 }
 /* code zodat het er goed uitziet op telefoon */
 @media only screen and (max-width: 600px) {
 .footer {
+    position: absolute;
     padding-top: 15%;
     padding-bottom: 15%;
+    margin-top: 85%;
   }
     
 }
