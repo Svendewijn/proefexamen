@@ -55,7 +55,7 @@ if ($result->num_rows > 0) {
         echo "<td data-label='Gebruikersnaam'>" . htmlspecialchars($row['gebruikersnaam']) . "</td>"; // Correcte aanroep van $row
         echo "<td data-label='Email'>" . htmlspecialchars($row['email']) . "</td>";
         echo "<td data-label='Acties'>";
-        echo "<a href='view_cv.php?id=" . $row['id'] . "' class='btn'>Bekijk CV</a>";
+        echo "<a href='profiel.php?id=" . $row['id'] . "' class='btn'>Bekijk CV</a>";
         if ($rol === 'admin') {
             echo "<a href='delete_user.php?id=" . $row['id'] . "' class='btn' onclick='return confirm(\"Weet je zeker dat je deze gebruiker wilt verwijderen?\");'>Verwijder</a>";
         }
