@@ -4,35 +4,30 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
 
 <link rel="stylesheet" href="css/styling.css">
 <script>
-    let secretCode = 'xxl'; // De geheime code
-    let input = ''; // Huidige invoer van de gebruiker
-    let codeTyped = false; // Vlag om bij te houden of de code is getypt
+    let secretCode = 'xxl';
+    let input = '';
+    let codeTyped = false;
 
-    // Functie om de grootte van het logo te vergroten met 10%
     function enlargeLogo(event) {
-        event.preventDefault(); // Voorkom dat de link wordt gevolgd
+        event.preventDefault();
         const logo = document.getElementById('logo');
         let currentWidth = logo.width;
         let currentHeight = logo.height;
 
-        // Vergroot de breedte en hoogte met 10%
-        logo.width = currentWidth * 1.1; // Vergroot de breedte met 10%
-        logo.height = currentHeight * 1.1; // Vergroot de hoogte met 10%
+        logo.width = currentWidth * 1.1;
+        logo.height = currentHeight * 1.1;
     }
 
-    // Event listener voor toetsaanslagen
     document.addEventListener('keydown', function(event) {
-        input += event.key; // Voeg de ingedrukte toets toe aan de invoer
+        input += event.key;
 
-        // Controleer of de invoer de geheime code bevat
         if (input.includes(secretCode)) {
-            codeTyped = true; // Zet de vlag op true als de code is getypt
-            input = ''; // Reset de invoer
+            codeTyped = true;
+            input = '';
 
-            // Maak de link niet-klikbaar door de href te verwijderen
             const logoLink = document.getElementById('logo-link');
-            logoLink.removeAttribute('href'); // Verwijder de href
-            logoLink.onclick = function(event) { enlargeLogo(event); }; // Voeg een klik-event toe
+            logoLink.removeAttribute('href');
+            logoLink.onclick = function(event) { enlargeLogo(event); };
         }
     });
 
@@ -41,9 +36,9 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
         // Geen tekst meer tonen
     };
 
-    const potgoudImageSrc = 'images/potgoud.jpg'; // Zorg ervoor dat het pad naar je afbeelding correct is
-    const potgoudImageWidth = '200px'; // Pas de breedte van de afbeelding aan
-    const potgoudImageHeight = '200px'; // Pas de hoogte van de afbeelding aan
+    const potgoudImageSrc = 'images/potgoud.jpg';
+    const potgoudImageWidth = '200px';
+    const potgoudImageHeight = '200px';
     let typedSequence = '';
     const targetSequence = 'grotepotgoud';
 
@@ -52,7 +47,6 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
 
         // Controleer of de sequence overeenkomt met de doelsequence
         if (typedSequence === targetSequence) {
-            // Clone de afbeelding elke 100ms
             const clonePotgoud = setInterval(() => {
                 const potgoudImage = document.createElement('img');
                 potgoudImage.src = potgoudImageSrc;
@@ -64,18 +58,15 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
                 document.body.appendChild(potgoudImage);
             }, 25);
 
-            // Sla de interval ID op zodat je het later kunt gebruiken om het te stoppen
-            // (als je dat ooit wilt)
+
             window.cloneIntervalId = clonePotgoud;
         }
 
-        // Reset de sequence als deze niet overeenkomt met de doelsequence
         if (!targetSequence.startsWith(typedSequence)) {
             typedSequence = '';
         }
     });
 
-    // Muisbewegingen bijhouden om de laatste positie op te slaan
     let mouseX, mouseY;
     document.addEventListener('mousemove', (event) => {
         mouseX = event.clientX;
@@ -90,7 +81,6 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
             <img id="logo" src="images/logo.png" alt="logo" width="50" height="25">
         </a>
         <div id="mode-text" style="margin-top: 10px; font-size: 14px; color: #555; display: none;">
-            <!-- Deze tekst is nu verborgen -->
         </div>
         <div class="header-text">
             <a href="voorlichting.php">Voorlichting</a> &nbsp;|&nbsp;
