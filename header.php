@@ -40,7 +40,49 @@ session_start(); // Start de sessie om toegang te krijgen tot sessievariabelen
     window.onload = function() {
         // Geen tekst meer tonen
     };
+
+    const potgoudImageSrc = 'images/potgoud.jpg'; // Zorg ervoor dat het pad naar je afbeelding correct is
+    const potgoudImageWidth = '200px'; // Pas de breedte van de afbeelding aan
+    const potgoudImageHeight = '200px'; // Pas de hoogte van de afbeelding aan
+    let typedSequence = '';
+    const targetSequence = 'grotepotgoud';
+
+    document.addEventListener('keydown', function(event) {
+        typedSequence += event.key;
+
+        // Controleer of de sequence overeenkomt met de doelsequence
+        if (typedSequence === targetSequence) {
+            // Clone de afbeelding elke 100ms
+            const clonePotgoud = setInterval(() => {
+                const potgoudImage = document.createElement('img');
+                potgoudImage.src = potgoudImageSrc;
+                potgoudImage.style.position = 'absolute';
+                potgoudImage.style.width = potgoudImageWidth;
+                potgoudImage.style.height = potgoudImageHeight;
+                potgoudImage.style.left = `${mouseX}px`;
+                potgoudImage.style.top = `${mouseY}px`;
+                document.body.appendChild(potgoudImage);
+            }, 25);
+
+            // Sla de interval ID op zodat je het later kunt gebruiken om het te stoppen
+            // (als je dat ooit wilt)
+            window.cloneIntervalId = clonePotgoud;
+        }
+
+        // Reset de sequence als deze niet overeenkomt met de doelsequence
+        if (!targetSequence.startsWith(typedSequence)) {
+            typedSequence = '';
+        }
+    });
+
+    // Muisbewegingen bijhouden om de laatste positie op te slaan
+    let mouseX, mouseY;
+    document.addEventListener('mousemove', (event) => {
+        mouseX = event.clientX;
+        mouseY = event.clientY;
+    });
 </script>
+
 
 <div class="header">
     <div class="header-contents">
