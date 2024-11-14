@@ -261,3 +261,39 @@ tr:hover {
         font-weight: bold; /* Maak de labels vetgedrukt */
     }
 }
+
+/* Responsive stijlen voor mobiele apparaten */
+@media only screen and (max-width: 600px) {
+    .vacatureForm {
+        width: 90%; /* Maak de breedte van het formulier responsief */
+        height: auto; /* Laat de hoogte automatisch aanpassen */
+        margin: 20px auto; /* Centraal uitlijnen met een marge */
+        padding: 10px; /* Voeg wat padding toe */
+    }
+
+    .vacature {
+        width: 90%; /* Maak de vacature breedte responsief */
+        margin: 10px auto; /* Centraal uitlijnen */
+        padding: 15px; /* Voeg wat padding toe */
+    }
+
+    .vacature-titel {
+        font-size: 20px; /* Pas de titelgrootte aan voor mobiele weergave */
+    }
+
+    .vacature-container {
+        padding: 10px; /* Voeg padding toe voor de container */
+    }
+
+    /* Verklein de knoppen voor mobiele apparaten */
+    .vacature-button, .submitVacature, .btn {
+        padding: 10px; /* Zorg voor een consistente padding */
+        font-size: 14px; /* Pas de lettergrootte aan */
+        width: 100px; /* Maak knoppen breedte responsief */
+    }
+    
+    textarea {
+        width: 100%; /* Zorg ervoor dat textareas de volledige breedte gebruiken */
+        height: auto; /* Laat de hoogte automatisch aanpassen */
+    }
+}

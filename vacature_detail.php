@@ -50,6 +50,7 @@ $result = $conn->query($sql);
     <link rel="stylesheet" href="css/vacature.css">
     <meta charset="UTF-8">
     <title>Vacature Details</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
     <?php include("header.php");?>
