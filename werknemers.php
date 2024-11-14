@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Werknemers</title>
-    <link rel="stylesheet" href="css/styling.css">
+    <link rel="stylesheet" href="css/styling.css"> <!-- Voeg hier je CSS-bestand toe -->
 </head>
 <body>
 <?php include 'header.php'; ?>
@@ -57,8 +57,13 @@ if ($result->num_rows > 0) {
         echo "<td><a href='profiel.php?id=" . $row['id'] . "' class='btn'>Bekijk Profiel</a>";
 
         // Voeg eventueel extra acties toe voor admins
-        if ($rol === 'admin') {
-            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder</a>"; // Voorbeeld van een delete knop
+        if ($rol === 'admin' && $row['id'] != $_SESSION['user_id']) {
+            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder</a>"; // Voorbeeld van een delete knop voor admins
+        }
+
+        // Voeg een delete-knop toe voor de ingelogde gebruiker
+        if ($row['id'] == $_SESSION['user_id']) {
+            echo " | <a href='delete_gebruiker.php?id=" . $row['id'] . "' class='btn'>Verwijder Mijn Uploads</a>";
         }
         
         echo "</td>";

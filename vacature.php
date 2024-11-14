@@ -29,6 +29,7 @@ $result = $conn->query($sql);
 
 // Haal de rol van de ingelogde gebruiker op
 $rol = isset($_SESSION['rol']) ? $_SESSION['rol'] : ''; 
+$user_id = $_SESSION['user_id']; // Haal de ingelogde gebruiker ID op
 
 ?>
 
@@ -59,8 +60,8 @@ if ($result->num_rows > 0) {
         echo "<p><em>Geplaatst op: " . $row['datum_geplaatst'] . "</em></p>";
         echo "</a>";
 
-        // Voeg de delete-knop toe als de gebruiker een admin is
-        if ($rol === 'admin') {
+        // Voeg de delete-knop toe als de gebruiker een admin is of de eigenaar van de vacature
+        if ($rol === 'admin' || $row['gebruiker_id'] == $user_id) {
             echo "<form action='delete_vacature.php' method='POST' style='display:inline;'>";
             echo "<input type='hidden' name='vacature_id' value='" . $row['id'] . "'>";
             echo "<input type='submit' value='Verwijder' onclick='return confirm(\"Weet je zeker dat je deze vacature wilt verwijderen?\");'>";

@@ -79,33 +79,29 @@ $result = $conn->query($sql);
                 echo "<div>";
                 echo "<p><strong>" . htmlspecialchars($comment_row['naam']) . "</strong> zei op " . $comment_row['datum_geplaatst'] . ":</p>";
                 echo "<p>" . htmlspecialchars($comment_row['reactie']) . "</p>";
-                echo "<hr>";
-                echo "</div>";
+
+                // Voeg de delete-knop toe als de gebruiker een admin is
+                if (isset($_SESSION['rol']) && $_SESSION['rol'] === 'admin') {
+                    echo "<form action='delete_comment.php' method='POST' style='display:inline;'>";
+                    echo "<input type='hidden' name='comment_id' value='" . $comment_row['id'] . "'>";
+                    echo "<input type='submit' value='Verwijder' onclick='return confirm(\"Weet je zeker dat je deze reactie wilt verwijderen?\");' class='btn'>";
+                    echo "</form>";
+                }
+
+                echo "</div><hr>";
             }
         } else {
             echo "<p>Geen reacties gevonden.</p>";
         }
         ?>
 
-        <?php
-        // Controleer of de gebruiker is ingelogd voordat het reactieformulier wordt weergegeven
-        if (isset($_SESSION['user_id'])) {
-        ?>
-            <form action="vacature_detail.php?id=<?php echo $vacature_id; ?>" method="POST">
-                <p><strong> Reactie achterlaten als <?php echo htmlspecialchars($_SESSION['username']); ?>:</strong></p>
-                <textarea name="reactie" required></textarea>
-                <br>
-                <input type="submit" name="submit_comment" value="Plaats reactie">
-            </form>
-        <?php
-        } else {
-            echo "<p>Log in om een reactie achter te laten.</p>";
-        }
-        ?>
+        <!-- Reactieformulier -->
+        <h3>Laat een reactie achter</h3>
+        <form action="" method="POST">
+            <textarea name="reactie" required></textarea>
+            <input type="submit" name="submit_comment" value="Plaats reactie" class="btn">
+        </form>
     </div>
+    <?php include("footer.php"); ?>
 </body>
 </html>
-
-<?php
-$conn->close();
-?>
