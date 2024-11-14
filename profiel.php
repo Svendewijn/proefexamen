@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="nl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -37,17 +37,19 @@ if (isset($_GET['id'])) {
     $userId = intval($_GET['id']); // Zorg ervoor dat de ID een integer is
 
     // Haal gebruikersgegevens op
-    $stmtUser  = $conn->prepare("SELECT gebruikersnaam, email FROM gebruikers WHERE id = ?");
-    $stmtUser ->bind_param("i", $userId);
-    $stmtUser ->execute();
-    $resultUser  = $stmtUser ->get_result();
+    $stmtUser    = $conn->prepare("SELECT gebruikersnaam, email FROM gebruikers WHERE id = ?");
+    $stmtUser   ->bind_param("i", $userId);
+    $stmtUser   ->execute();
+    $resultUser    = $stmtUser   ->get_result();
 
-    if ($resultUser ->num_rows > 0) {
-        $user = $resultUser ->fetch_assoc();
+    if ($resultUser   ->num_rows > 0) {
+        $user = $resultUser   ->fetch_assoc();
+        echo "<div class='block-settings'>";
         echo "<h2>" . htmlspecialchars($user['gebruikersnaam']) . "'s Profiel</h2>";
         echo "<p>Email: " . htmlspecialchars($user['email']) . "</p>";
+        echo "</div>"; // Sluit de block-settings div
     } else {
-        echo "Geen gebruiker gevonden.";
+        echo "<div class='block-settings'><p>Geen gebruiker gevonden.</p></div>";
     }
 
     // Haal bestanden op voor de geselecteerde gebruiker
@@ -58,10 +60,9 @@ if (isset($_GET['id'])) {
 
     // Controleer of er bestanden zijn
     if ($resultFiles->num_rows > 0) {
+        echo "<div class='block-settings'>";
+        echo "<h3>Bestanden:</h3>";
         while ($row = $resultFiles->fetch_assoc()) {
-            // Debug: Print de gegevens van het bestand
-            // var_dump($row); // Uncomment deze regel voor debugging
-
             // Controleer of het bestandstype een video is
             if (in_array($row['file_type'], ['video/mp4', 'video/quicktime'])) {
                 // Embed de video direct
@@ -74,17 +75,18 @@ if (isset($_GET['id'])) {
                 echo "<p>" . nl2br(htmlspecialchars($row['file_data'])) . "</p>"; // Gebruik nl2br om nieuwe regels te behouden
             } else {
                 // Voor andere bestandstypen, toon de bestandsnaam als een downloadlink
-                echo "<h2><a href='download.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['file_name']) . "</a></h2>";
+                echo "<h4><a href='download.php?id=" . $row['id'] . "'>" . htmlspecialchars($row['file_name']) . "</a></h4>";
             }
         }
+        echo "</div>"; // Sluit de block-settings div voor bestanden
     } else {
-        echo "Geen bestanden beschikbaar voor deze gebruiker.";
+        echo "<div class='block-settings'><p>Geen bestanden beschikbaar voor deze gebruiker.</p></div>";
     }
 
-    $stmtUser ->close();
+    $stmtUser   ->close();
     $stmtFiles->close();
 } else {
-    echo "Geen gebruiker ID opgegeven.";
+    echo "<div class='block-settings'><p>Geen gebruiker ID opgegeven.</p></div>";
 }
 
 $conn->close();

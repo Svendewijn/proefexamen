@@ -160,6 +160,36 @@ a:link {
     font-weight: bold; 
 }
 
+.block-settings textarea,
+.block-settings input[type="file"] {
+    width: 100%; 
+    padding: 10px; 
+    margin-bottom: 15px; 
+    border: 1px solid #ccc; 
+    border-radius: 4px; 
+    box-sizing: border-box; 
+}
+
+.block-settings input[type="submit"] {
+    background-color: #4CAF50; 
+    color: white; 
+    border: none; 
+    padding: 10px 15px; 
+    border-radius: 4px; 
+    cursor: pointer; 
+    font-size: 16px; 
+    transition: background-color 0.3s; 
+}
+
+.block-settings input[type="submit"]:hover {
+    background-color: #45a049; 
+}
+
+.block-settings input[type="submit"]:disabled {
+    background-color: #ccc; 
+    cursor: not-allowed; 
+}
+
 .block-settings input[type="text"],
 .block-settings input[type="email"],
 .block-settings input[type="password"],
