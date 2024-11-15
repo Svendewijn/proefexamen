@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 13 nov 2024 om 15:21
+-- Gegenereerd op: 15 nov 2024 om 09:18
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.0.30
 
@@ -38,13 +38,6 @@ CREATE TABLE `vacatureposts` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
--- Gegevens worden geëxporteerd voor tabel `vacatureposts`
---
-
-INSERT INTO `vacatureposts` (`id`, `titel`, `beschrijving`, `locatie`, `salaris`, `datum_geplaatst`, `gebruiker_id`) VALUES
-(13, 'derakkersbv', 'wij zijn de rakkers kleine tyfus aap', 'delly', 2.00, '2024-11-13 14:17:56', 6);
-
---
 -- Indexen voor geëxporteerde tabellen
 --
 
@@ -62,7 +55,7 @@ ALTER TABLE `vacatureposts`
 -- AUTO_INCREMENT voor een tabel `vacatureposts`
 --
 ALTER TABLE `vacatureposts`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
