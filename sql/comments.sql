@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Gegenereerd op: 12 nov 2024 om 14:49
+-- Gegenereerd op: 15 nov 2024 om 09:23
 -- Serverversie: 10.4.32-MariaDB
 -- PHP-versie: 8.0.30
 
@@ -44,7 +44,17 @@ INSERT INTO `comments` (`id`, `vacature_id`, `naam`, `reactie`, `datum_geplaatst
 (2, 1, 'angelien', 'bert hou ff je bek dicht', '2024-11-12 10:08:11'),
 (3, 3, 'bert', 'KONTBEDRIJF', '2024-11-12 10:51:32'),
 (4, 5, 'bert', 'hoi', '2024-11-12 12:48:21'),
-(5, 4, 'Legends_of_Gaming_NL', 'wajoo', '2024-11-12 12:57:01');
+(5, 4, 'Legends_of_Gaming_NL', 'wajoo', '2024-11-12 12:57:01'),
+(6, 5, 'bert', 'nee toch niet', '2024-11-13 08:20:33'),
+(7, 7, 'jip', 'dat ben ik', '2024-11-13 09:27:45'),
+(8, 7, 'jip', 'oi oi oi\r\n', '2024-11-13 09:28:06'),
+(9, 7, 'jip', 'lalala', '2024-11-13 09:33:50'),
+(10, 7, 'jip', 'aa', '2024-11-13 09:35:13'),
+(11, 7, 'jip', '@jip hou je tyfus smoel', '2024-11-13 09:35:54'),
+(12, 8, 'jip', 'is goed G', '2024-11-13 09:47:36'),
+(13, 8, 'jip', 'lalala', '2024-11-13 09:56:10'),
+(15, 13, 'jannes', 'kinderarts', '2024-11-14 09:32:40'),
+(16, 13, 'kaki', 'oke\r\n', '2024-11-14 12:26:36');
 
 --
 -- Indexen voor geëxporteerde tabellen
@@ -65,17 +75,7 @@ ALTER TABLE `comments`
 -- AUTO_INCREMENT voor een tabel `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
-
---
--- Beperkingen voor geëxporteerde tabellen
---
-
---
--- Beperkingen voor tabel `comments`
---
-ALTER TABLE `comments`
-  ADD CONSTRAINT `comments_ibfk_1` FOREIGN KEY (`vacature_id`) REFERENCES `vacatureposts` (`id`);
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
